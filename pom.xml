@@ -10,10 +10,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.okanerturan</groupId>
-    <artifactId>techcareer_java_bootcamp</artifactId>
+    <artifactId>techcareer_fullstack_course</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>techcareer_java_bootcamp</name>
-    <description>techcareer_java_bootcamp</description>
+    <name>techcareer_fullstack_course</name>
+    <description>techcareer_fullstack_course</description>
     <url/>
     <licenses>
         <license/>
