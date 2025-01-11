@@ -35,7 +35,7 @@ public class TodoService {
 
     @Transactional
     public TodoResponseDTO createTodo(TodoCreateRequestDTO request) {
-        if (todoRepository.existsByTitleAndDescription(request.getTitle(), request.getDescription())) {
+        if (todoRepository.existsByTitleAndDetails(request.getTitle(), request.getDetails())) {
             throw new DuplicateTodoException();
         }
         Todo todo = todoMapper.toEntity(request);
@@ -47,8 +47,8 @@ public class TodoService {
     public TodoResponseDTO updateTodo(Long id, TodoUpdateRequestDTO request) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Todo not found with id: " + id));
 
-        // Check if another todo (excluding current one) exists with same title and description
-        boolean todoWithSameDetailsExists = todoRepository.existsByTitleAndDescriptionAndIdNot(request.getTitle(), request.getDescription(), id);
+        // Check if another todo (excluding current one) exists with same title and details
+        boolean todoWithSameDetailsExists = todoRepository.existsByTitleAndDetailsAndIdNot(request.getTitle(), request.getDetails(), id);
 
         if (todoWithSameDetailsExists) {
             throw new DuplicateTodoException();

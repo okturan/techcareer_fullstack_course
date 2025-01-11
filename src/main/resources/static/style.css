@@ -38,7 +38,7 @@ h1 {
   max-width: 10rem;
 }
 
-#description {
+#details {
   flex: 1;
 }
 
@@ -93,12 +93,12 @@ button:hover {
   margin-bottom: 0.5rem;
 }
 
-.todo-description {
+.todo-details {
   color: #666;
   white-space: pre-wrap;
 }
 
-.description-textarea {
+.details-textarea {
   min-height: 100px;
   white-space: pre-wrap;
   width: 100%;
@@ -155,7 +155,7 @@ button:hover {
 }
 
 .completed .todo-title,
-.completed .todo-description {
+.completed .todo-details {
   text-decoration: line-through;
 }
 

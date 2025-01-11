@@ -13,14 +13,14 @@ public class TodoMapper {
     public Todo toEntity(TodoCreateRequestDTO request) {
         return Todo.builder()
                 .title(request.getTitle())
-                .description(request.getDescription())
+                .details(request.getDetails())
                 .completed(false)
                 .build();
     }
 
     public Todo updateEntityFromRequest(Todo todo, TodoUpdateRequestDTO request) {
         todo.setTitle(request.getTitle());
-        todo.setDescription(request.getDescription());
+        todo.setDetails(request.getDetails());
         todo.setCompleted(request.getCompleted());
         return todo;
     }
@@ -29,7 +29,7 @@ public class TodoMapper {
         return TodoResponseDTO.builder()
                 .id(todo.getId())
                 .title(todo.getTitle())
-                .description(todo.getDescription())
+                .details(todo.getDetails())
                 .completed(todo.isCompleted())
                 .build();
     }

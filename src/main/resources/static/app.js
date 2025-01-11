@@ -17,14 +17,14 @@ async function fetchTodos() {
 }
 
 // Create new todo
-async function createTodo(title, description) {
+async function createTodo(title, details) {
     try {
         const response = await fetch(API_BASE_URL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ title, description }),
+            body: JSON.stringify({ title, details }),
         });
         if (response.ok) {
             fetchTodos();
@@ -38,7 +38,7 @@ async function createTodo(title, description) {
 }
 
 // Toggle todo completion
-async function toggleTodo(id, title, description, completed) {
+async function toggleTodo(id, title, details, completed) {
     try {
         const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: 'PUT',
@@ -47,7 +47,7 @@ async function toggleTodo(id, title, description, completed) {
             },
             body: JSON.stringify({
                 title,
-                description,
+                details,
                 completed: !completed
             }),
         });
@@ -60,7 +60,7 @@ async function toggleTodo(id, title, description, completed) {
 }
 
 // Edit todo
-async function editTodo(id, title, description, completed) {
+async function editTodo(id, title, details, completed) {
     try {
         const response = await fetch(`${API_BASE_URL}/${id}`, {
             method: 'PUT',
@@ -69,7 +69,7 @@ async function editTodo(id, title, description, completed) {
             },
             body: JSON.stringify({ 
                 title, 
-                description,
+                details,
                 completed
             }),
         });
@@ -99,14 +99,14 @@ async function deleteTodo(id) {
 }
 
 // Switch to edit mode
-function switchToEditMode(todoElement, id, title, description, completed) {
+function switchToEditMode(todoElement, id, title, details, completed) {
     const contentDiv = todoElement.querySelector('.todo-content');
     const actionsDiv = todoElement.querySelector('.todo-actions');
 
     // Create edit form
     contentDiv.innerHTML = `
         <input type="text" class="edit-input" id="edit-title-${id}" value="${title}" />
-        <textarea class="edit-input description-textarea" id="edit-description-${id}">${description}</textarea>
+        <textarea class="edit-input details-textarea" id="edit-details-${id}">${details}</textarea>
     `;
 
     // Update actions
@@ -126,13 +126,13 @@ function renderTodos(todos) {
         todoElement.innerHTML = `
             <div class="todo-content">
                 <div class="todo-title">${todo.title}</div>
-                <div class="todo-description">${todo.description.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
+                <div class="todo-details">${todo.details.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</div>
             </div>
             <div class="todo-actions">
-                <button class="toggle-btn" data-id="${todo.id}" data-title="${todo.title}" data-description="${todo.description}" data-completed="${todo.completed}">
+                <button class="toggle-btn" data-id="${todo.id}" data-title="${todo.title}" data-details="${todo.details}" data-completed="${todo.completed}">
                     ${todo.completed ? 'Undo' : 'Complete'}
                 </button>
-                <button class="edit-btn" data-id="${todo.id}" data-title="${todo.title}" data-description="${todo.description}" data-completed="${todo.completed}">
+                <button class="edit-btn" data-id="${todo.id}" data-title="${todo.title}" data-details="${todo.details}" data-completed="${todo.completed}">
                     Edit
                 </button>
                 <button class="delete-btn" data-id="${todo.id}">Delete</button>
@@ -148,13 +148,13 @@ todoForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const titleInput = document.getElementById('title');
-    const descriptionInput = document.getElementById('description');
+    const detailsInput = document.getElementById('details');
     
-    const success = await createTodo(titleInput.value, descriptionInput.value);
+    const success = await createTodo(titleInput.value, detailsInput.value);
     
     if (success) {
         titleInput.value = '';
-        descriptionInput.value = '';
+        detailsInput.value = '';
     }
 });
 
@@ -168,20 +168,20 @@ todoList.addEventListener('click', async (e) => {
             todoItem,
             button.dataset.id,
             button.dataset.title,
-            button.dataset.description,
+            button.dataset.details,
             button.dataset.completed === 'true'
         );
     } else if (button.classList.contains('save-btn')) {
         const id = button.dataset.id;
         const completed = button.dataset.completed === 'true';
         const titleInput = document.getElementById(`edit-title-${id}`);
-        const descriptionInput = document.getElementById(`edit-description-${id}`);
+        const detailsInput = document.getElementById(`edit-details-${id}`);
         
-        if (titleInput && descriptionInput) {
+        if (titleInput && detailsInput) {
             const success = await editTodo(
                 id,
                 titleInput.value,
-                descriptionInput.value,
+                detailsInput.value,
                 completed
             );
             if (success) {
@@ -191,8 +191,8 @@ todoList.addEventListener('click', async (e) => {
     } else if (button.classList.contains('cancel-btn')) {
         fetchTodos();
     } else if (button.classList.contains('toggle-btn')) {
-        const { id, title, description, completed } = button.dataset;
-        await toggleTodo(id, title, description, completed === 'true');
+        const { id, title, details, completed } = button.dataset;
+        await toggleTodo(id, title, details, completed === 'true');
     } else if (button.classList.contains('delete-btn')) {
         await deleteTodo(button.dataset.id);
     }

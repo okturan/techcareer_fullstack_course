@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class TodoResponseDTO {
     private Long id;
     private String title;
-    private String description;
+    private String details;
     private boolean completed;
 }
