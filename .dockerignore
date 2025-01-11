@@ -1,0 +1,13 @@
+.git
+.gitignore
+README.md
+CHANGELOG.md
+docker-compose.yml
+Dockerfile
+.env
+*.md
+.DS_Store
+.idea/
+*.iml
+target/
+!target/*.jar

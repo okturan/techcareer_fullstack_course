@@ -6,14 +6,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.1</version>
+        <version>3.3.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.okanerturan</groupId>
-    <artifactId>techcareer_fullstack_course</artifactId>
+    <groupId>com.okturan</groupId>
+    <artifactId>techcareer_java_todo_assignment</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>techcareer_fullstack_course</name>
-    <description>techcareer_fullstack_course</description>
+    <name>techcareer_java_todo_assignment</name>
+    <description>techcareer_java_todo_assignment</description>
     <url/>
     <licenses>
         <license/>
@@ -32,6 +32,11 @@
     </properties>
     <dependencies>
         <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.0.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
@@ -45,23 +50,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.thymeleaf.extras</groupId>
-            <artifactId>thymeleaf-extras-springsecurity6</artifactId>
         </dependency>
 
         <dependency>
@@ -71,13 +64,8 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
@@ -107,6 +95,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
+                            <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
